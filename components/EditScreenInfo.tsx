@@ -5,8 +5,11 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
+import { Button, TextInput } from 'react-native';
 
-export default function EditScreenInfo({ path }: { path: string }) {
+export default function EditScreenInfo() {
+  const [text, onChangeText] = React.useState("Useless Text");
+  const [number, onChangeNumber] = React.useState(null);
   return (
     <View>
       <View style={styles.getStartedContainer}>
@@ -14,38 +17,42 @@ export default function EditScreenInfo({ path }: { path: string }) {
           style={styles.getStartedText}
           lightColor="rgba(0,0,0,0.8)"
           darkColor="rgba(255,255,255,0.8)">
-          Open up the code for this screen:
+          Demo project React Native
         </Text>
 
         <View
           style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
           darkColor="rgba(255,255,255,0.05)"
           lightColor="rgba(0,0,0,0.05)">
-          <MonoText>{path}</MonoText>
+          <MonoText>Đăng nhập</MonoText>
         </View>
 
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Change any of the text, save the file, and your app will automatically update.
-        </Text>
+        <TextInput
+            style={styles.input}
+            onChangeText={onChangeText}
+            placeholder="Tên tài khoản"
+        />
+        <TextInput
+            style={styles.input}
+            placeholder="Mật khẩu"
+            keyboardType="visible-password"
+        />
       </View>
 
-      <View style={styles.helpContainer}>
-        <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-          <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
-            Tap here if your app doesn't automatically update after making changes
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <Button title="Đăng nhập" onPress={handleYouTube}></Button>
     </View>
   );
 }
 
 function handleHelpPress() {
   WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet'
+    'https://www.google.com/'
+  );
+}
+
+function handleYouTube() {
+  WebBrowser.openBrowserAsync(
+      'https://www.youtube.com/'
   );
 }
 
@@ -76,5 +83,16 @@ const styles = StyleSheet.create({
   },
   helpLinkText: {
     textAlign: 'center',
+  },
+  youTubeButton: {
+    borderRadius: 10,
+    width: 20
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    width: 200
   },
 });
